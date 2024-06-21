@@ -4,11 +4,6 @@ const app = express();
 require('dotenv').config();
 const PORT = process.env.PORT;
 
-const fileUpload = require('express-fileupload');
-app.use(fileUpload({
-    useTempFiles: true,
-    tempFileDir: './tmp/'
-}));
 const cookieParser = require("cookie-parser");
 app.use(express.json());
 app.use(cookieParser());
@@ -40,8 +35,6 @@ app.use(cors({
 const db = require('./config/database');
 db.connect();
 
-const cloudinary = require('./config/cloudinary');
-cloudinary.connect();
 
 const router = require('./routes/userRoutes')
 app.use('/api/v1', router)

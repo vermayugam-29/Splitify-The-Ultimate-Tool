@@ -3,26 +3,11 @@ const OTP = require('../models/OTP');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const cloudinary = require('cloudinary').v2;
 const generateDefault = require('../utils/defaultImgHandler');
 const Group = require('../models/Group');
 const Settlement = require('../models/Settlement');
 const Expense = require('../models/Expense');
 
-function isFileTypeSupported(type, supportedTypes) {
-    return supportedTypes.includes(type);
-}
-
-async function uploadFileToCloudinary(file, folder, quality) {
-    const options = { folder };
-
-    if (quality) {
-        options.quality = quality;
-    }
-
-    options.resource_type = 'auto';
-    return await cloudinary.uploader.upload(file.tempFilePath, options);
-}
 
 //user sign-up
 exports.signUp = async (req, res) => {
@@ -64,41 +49,7 @@ exports.signUp = async (req, res) => {
             });
         }
 
-        let imageUrl;
-        if (file) {
-            const supportedTypes = ['jpg', 'jpeg', 'png'];
-
-            const extension = file.name.split('.').at(-1).toLowerCase();
-
-            if (!isFileTypeSupported(extension, supportedTypes)) {
-                return res.status(400).json({
-                    success: false,
-                    message: 'File format not supported'
-                })
-            }
-
-            const sizeLimit = 500 * 1024;
-
-            if (file.size > sizeLimit) {
-                return res.status(404).json({
-                    success: false,
-                    message: 'Image should be less than 500Kb'
-                })
-            }
-
-
-            const cloudinaryResponse = await uploadFileToCloudinary(file, 'practice');
-            if (cloudinaryResponse && cloudinaryResponse.secure_url) {
-                imageUrl = cloudinaryResponse.secure_url;
-            } else {
-                return res.status(500).json({
-                    success: false,
-                    message: 'Failed to upload image to Cloudinary'
-                });
-            }
-        } else {
-            imageUrl = generateDefault(name);
-        }
+        let imageUrl = generateDefault(name);
 
         const newUser = await User.create({
             name, email, password: hashedPassword, imageUrl
