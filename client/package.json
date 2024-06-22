@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy" : "http://splitify-the-ultimate-tool.vercel.app",
+  "proxy" : "https://splitify-the-ultimate-tool-yugam-vermas-projects-90800377.vercel.app",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.17.0",

@@ -11,19 +11,9 @@ app.use(cookieParser());
 //cors
 const cors = require('cors');
 
-// app.use(cors(
-//     {
-//         origin: '*',
-//         methods: ['GET', 'PUT', 'POST', 'DELETE'],
-//         credentials: true
-//     }
-// ));
-
 app.use(cors({
     origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
         if (!origin) return callback(null, true);
-        // Allow all origins
         return callback(null, true);
     },
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
