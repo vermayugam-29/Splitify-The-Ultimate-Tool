@@ -39,6 +39,12 @@ db.connect();
 const router = require('./routes/userRoutes')
 app.use('/api/v1', router)
 
+app.get('/' , (req , res) => {
+    res.json({
+        success : true,
+        testing : 'Working fine'
+    })
+})
 
 app.listen(PORT, () => {
     console.log(`Successfully Connected at ${PORT}`)
