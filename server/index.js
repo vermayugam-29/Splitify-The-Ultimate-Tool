@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const path = require('path')
 
 require('dotenv').config();
 const PORT = process.env.PORT;
@@ -29,12 +30,25 @@ db.connect();
 const router = require('./routes/userRoutes')
 app.use('/api/v1', router)
 
-app.get('/' , (req , res) => {
-    res.json({
-        success : true,
-        testing : 'Working fine'
+// app.get('/' , (req , res) => {
+//     res.json({
+//         success : true,
+//         testing : 'Working fine'
+//     })
+// })
+
+const __dirname1 = path.resolve();
+
+if(process.env.NODE_ENV == 'development'){
+    const staticPath = path.join(__dirname1, '../client' , 'build');
+
+    app.use(express.static(staticPath));
+    app.get('*', (req, res)=>{
+        const indexPath = path.join(__dirname1, '../client', 'build', 'index.html');
+        res.sendFile(indexPath);
     })
-})
+}
+
 
 app.listen(PORT, () => {
     console.log(`Successfully Connected at ${PORT}`)

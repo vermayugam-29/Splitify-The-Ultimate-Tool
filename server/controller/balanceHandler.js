@@ -104,6 +104,7 @@ exports.viewBalance = async (req, res) => {
             );
             let amount = settlemetByMe ? settlemetByMe.amount : 0;
             ans[i].amount = ans[i].amount + amount;
+            ans[i].amount = parseFloat(ans[i].amount).toFixed(2);
         }
         for (let i = 0; i < ans.length; i++) {
             const settlemetByPerson = await Settlement.findOne(
@@ -111,6 +112,7 @@ exports.viewBalance = async (req, res) => {
             );
             let amount = settlemetByPerson ? settlemetByPerson.amount : 0;
             ans[i].amount = ans[i].amount - amount;
+            ans[i].amount = parseFloat(ans[i].amount).toFixed(2);
         }
 
 

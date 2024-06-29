@@ -1076,8 +1076,8 @@ button:hover {
 
 /*Spinner CSS*/
 .spinner-parent {
-    width: 90vw;
-    height: 90vh;
+    width: 96vw;
+    height: 96vh;
     overflow: hidden;
     display: flex;
     justify-content: center;

@@ -57,7 +57,7 @@ const ExpenseCard = ({ expense, user ,group }) => {
                     </span>
                     <span className={expense.paidById === user ? 'lent' : 'borrow'}>
                         ₹{
-                            expense.paidById === user ? `${expense.amountPaid}`
+                            expense.paidById === user ? `${parseFloat(expense.amountPaid - expense.amountPaidToUser).toFixed(2)}`
                                 : `${expense.amountPaidToUser}`
                         }
                     </span>

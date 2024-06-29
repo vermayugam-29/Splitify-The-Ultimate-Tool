@@ -27,6 +27,7 @@ const App = () => {
     dispatch(fetchUser());
   },[])
 
+
   if(loading ){
     return (
       <Spinner></Spinner>

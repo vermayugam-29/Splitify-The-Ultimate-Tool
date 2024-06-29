@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
@@ -11,7 +11,7 @@ import { addExpense } from '../../services/expenses';
 
 
 
-const AddExpense = ({ show, handleClose, group ,currUser }) => {
+const AddExpense = ({ show, handleClose, group, currUser }) => {
 
   const [expenseHandler, setExpenseHandler] = useState({
     description: '',
@@ -63,7 +63,7 @@ const AddExpense = ({ show, handleClose, group ,currUser }) => {
       toast.error('Description cannot be empty');
       return;
     }
-    if(expenseHandler.description.trim().length > 10){
+    if (expenseHandler.description.trim().length > 20) {
       toast.error('ExpenseName Cannot be this long');
       return;
     }
@@ -88,7 +88,11 @@ const AddExpense = ({ show, handleClose, group ,currUser }) => {
       value: expenseHandler.amount
     }
     const groupName = group._id;
-    dispatch(addExpense(groupName, amount, expenseHandler.description, splitBetween, currUser,navigate));
+    dispatch(addExpense(groupName, amount, expenseHandler.description, splitBetween, currUser, navigate));
+    setExpenseHandler({
+      description: '',
+      amount: 0
+    })
   }
 
 
@@ -100,13 +104,13 @@ const AddExpense = ({ show, handleClose, group ,currUser }) => {
     <div className={`modal ${show ? 'show' : ''}`}>
       <div className="modal-content-expense">
         <div className='add-expense-modal'>
-          <FaTimes  onClick={handleClose} />
+          <FaTimes onClick={handleClose} />
           <h1>Add Expense</h1>
           <span>Enter expense description: </span>
           <input required value={expenseHandler.description} name='description' onChange={changeHandler} />
           <span>Enter expense amount: </span>
-          <input required value={expenseHandler.amount} 
-          name='amount' onChange={changeHandler} type='number' />
+          <input required value={expenseHandler.amount}
+            name='amount' onChange={changeHandler} type='number' />
 
 
           <div className='paid-by'>
