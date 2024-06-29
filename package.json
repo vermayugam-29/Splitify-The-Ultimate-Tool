@@ -7,7 +7,7 @@
     "install-frontend" : "cd client && npm install",
     "install-backend" : "cd server && npm install",
     "start" : "npm run install-frontend && npm run install-backend",
-    "build-frontend" : "cd client && npm run build",
+    "build-frontend" : "cd client && npm run build --force",
     "start-server" : "cd server && node index.js",
     "build" : "npm run build-frontend && npm run start-server"
   },
