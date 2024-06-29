@@ -1,0 +1,15 @@
+{
+  "name": "splitify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install-frontend" : "cd client && npm install",
+    "install-backend" : "cd server && npm install",
+    "start" : "npm run install-backend && npm run install-frontend",
+    "build" : "cd server && node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
